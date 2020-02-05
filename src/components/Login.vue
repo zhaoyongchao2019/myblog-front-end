@@ -4,30 +4,43 @@
       <div class="form">
         <div class="row">
             <label>账号</label>
-            <el-input v-model="account"></el-input>
+            <el-input v-model="user"></el-input>
         </div>
         <div class="row">
             <label>密码</label>
             <el-input v-model="password"></el-input>
         </div>
-        <el-button type="primary" class="login-b">登录</el-button>
+        <el-button type="primary" class="login-b" @click="login">登录</el-button>
       </div>
   </div>
 </template>
 
 <script>
+import {valiApi} from '../api/login'
 export default {
     data(){
         return{
-            account:'',
+            user:'',
             password:'',
         }
     },
     methods:{
         close(){
             this.$store.commit('disshow_login')
+        },
+        login(){
+            this.$store.dispatch('tologin',{user:this.user,password:this.password})
         }
+    },
+    async created(){
+    let res = await valiApi();
+    this.nickname = res.username
+    if(res.username !== undefined){
+      alert("welcome " + res.username)
+    } else {
+      alert("请登录")
     }
+  }
 }
 </script>
 

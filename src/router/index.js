@@ -29,8 +29,13 @@ const router = new VueRouter({
 })
 
 router.beforeEach((to,from,next)=>{
-  if(to.meta.login){
-    store.commit('show_login')
+  if(to.meta.login){//需要登录才能进入的页面
+    if(localStorage.getItem('token')){//已经登录
+      next()
+    }
+    else{//没有登录
+      store.commit('show_login')
+    }
   }
   else{
     next()
