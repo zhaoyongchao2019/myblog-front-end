@@ -3,19 +3,39 @@
         <div class="container">
             <div class="per-info">
                 <div class="photo">
-                    <img src="../assets/sjch.jpg">
+                    <img src="../assets/xyql.jpg">
                 </div>
                 <div class="nickname">qiaoqiao</div>
                 <div class="introduction">前端开发nodejs</div>
                 <div class="operation">
-                    <el-button type="primary">浏览文章</el-button>
-                    <el-button type="primary">写文章</el-button>
+                    <router-link to="/myblog/showarticle"><el-button type="primary">浏览文章</el-button></router-link>
+                    <router-link to="/myblog/writearticle"><el-button type="primary">写文章</el-button></router-link>
                 </div>
             </div>
-            <div class="blog-info"></div>
+            <div class="blog-info">
+                <router-view></router-view>
+            </div>
         </div>
     </div>
 </template>
+
+<script>
+import EditorBar from '../components/EditorBar'
+export default {
+    components:{EditorBar},
+    data(){
+        return{
+            isClear:false,
+            detail:''
+        }
+    },
+    methods:{
+        change(val){
+            console.log(val)
+        }
+    }
+}
+</script>
 
 <style scoped>
 .back{
@@ -27,18 +47,21 @@
     width:1300px;
     height:100%;
     margin: 0 auto;
-    display: flex;
-    justify-content: space-between
+    position: relative;
 }
 .per-info{
     width:20%;
-    height: 100%;
+    height:400px;
     background: white;
+    position: absolute;
+    left:0;
 }
 .blog-info{
     width: 79.5%;
     height:100%;
-    background: white
+    background: white;
+    position: absolute;
+    right:0
 }
 .per-info img{
     border-radius: 50%;

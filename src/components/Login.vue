@@ -16,7 +16,6 @@
 </template>
 
 <script>
-import {valiApi} from '../api/login'
 export default {
     data(){
         return{
@@ -32,14 +31,8 @@ export default {
             this.$store.dispatch('tologin',{user:this.user,password:this.password})
         }
     },
-    async created(){
-    let res = await valiApi();
-    this.nickname = res.username
-    if(res.username !== undefined){
-      alert("welcome " + res.username)
-    } else {
-      alert("请登录")
-    }
+    created(){
+    this.$store.dispatch('valiApi')
   }
 }
 </script>

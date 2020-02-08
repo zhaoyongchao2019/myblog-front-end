@@ -29,7 +29,12 @@ export default new Vuex.Store({
         commit("setusername",username)
         // token 具有时效性 登录成功 把token存在本地存储
         localStorage["token"] = token
-        commit('disshow_login')
+        if(this.state.username){
+          commit('disshow_login')
+        }
+        else{
+          alert('登录失败')
+        }
     },
     async valiApi({commit}){
       const { username, token } = await valiApi();
